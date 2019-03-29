@@ -10,9 +10,14 @@ import UIKit
 
 class TodoViewController: UITableViewController {
     var itemArray = ["ready", "set", "go"]
+    let defaults = UserDefaults.standard
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        //retain data from defaults if terminated
+//        if our array is empty our app will crash so lets do if let to check if its empty
+        if let items = UserDefaults.standard.array(forKey: "TodoListArray") as? [String] {
+            itemArray = items
+        }
     }
     //    MARK: DATA SOURCE
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,6 +53,7 @@ class TodoViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default, handler: { (action) in
             //what happends when the user clicks add on UI ALERT
             self.itemArray.append(textField.text!)
+            self.defaults.set(self.itemArray, forKey: "TodoListArray")
             self.tableView.reloadData()
             
         })
