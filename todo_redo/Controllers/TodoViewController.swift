@@ -8,29 +8,15 @@
 
 import UIKit
 
+
 class TodoViewController: UITableViewController {
-    let defaults = UserDefaults.standard
     var itemArray = [Item]()
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let newItem = Item()
-        newItem.title = "Find larry"
-        itemArray.append(newItem)
-        
-        let newItem1 = Item()
-        newItem1.title = "Find larry"
-        itemArray.append(newItem1)
-        
-        let newItem2 = Item()
-        newItem2.title = "hustle"
-        itemArray.append(newItem2)
-
-        //retain data from defaults if terminated
-//        if our array is empty our app will crash so lets do if let to check if its empty
-        if let items = UserDefaults.standard.array(forKey: "TodoListArray") as? [Item] {
-            itemArray = items
-        }
+        loadItems()
     }
     //    MARK: DATA SOURCE
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,10 +39,8 @@ class TodoViewController: UITableViewController {
     //    in this case using these methods we do not have to set no IBAction, no "delegate = self" property.
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
-        
-        tableView.reloadData()
+        saveData()
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -71,9 +55,8 @@ class TodoViewController: UITableViewController {
             newItem.title = textField.text!
             //what happends when the user clicks add on UI ALERT
             //self.itemArray.append(textField.text!)
-            self.defaults.set(self.itemArray, forKey: "TodoListArray")
-            self.tableView.reloadData()
-            
+            self.itemArray.append(newItem)
+            self.saveData()
         })
 //        add a textfield to UIALERT
         alert.addTextField { (alertTextField) in
@@ -84,6 +67,39 @@ class TodoViewController: UITableViewController {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
         
+    }
+    
+    //    MARK: Data manipulation
+    
+    //this method encodes from type Item to Plist
+    func saveData() {
+        //createencoder
+        let encoder = PropertyListEncoder()
+        
+        
+        do {
+            let data = try encoder.encode(itemArray)
+            try data.write(to: dataFilePath!)
+        } catch {
+            print("error encoding item array, \(error)")
+        }
+        tableView.reloadData()
+        
+    }
+    //method that decodes the contents od dataFilePath to type Item
+    func loadItems() {
+        // try? turns the result of the data() method intoan optional
+        if let data = try? Data(contentsOf: dataFilePath!) {
+            //create decoder
+            let decoder = PropertyListDecoder()
+            
+//            decode is the method to decode encoded data...you must specify its data type
+            do {
+                itemArray = try decoder.decode([Item].self, from: data)
+            } catch {
+                print("Error decoding \(error)")
+            }
+        }
     }
     
 
