@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B838C6F222526BB9008D0417 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B838C6F022526BB8008D0417 /* DataModel.xcdatamodeld */; };
 		B8CD951C224D70EE00F92C5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD951B224D70EE00F92C5F /* AppDelegate.swift */; };
 		B8CD951E224D70EE00F92C5F /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD951D224D70EE00F92C5F /* TodoViewController.swift */; };
 		B8CD9521224D70EE00F92C5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8CD951F224D70EE00F92C5F /* Main.storyboard */; };
 		B8CD9523224D70EE00F92C5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8CD9522224D70EE00F92C5F /* Assets.xcassets */; };
 		B8CD9526224D70EE00F92C5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8CD9524224D70EE00F92C5F /* LaunchScreen.storyboard */; };
-		B8CD953522502B4100F92C5F /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD953422502B4100F92C5F /* Item.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B838C6F122526BB9008D0417 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		B8CD9518224D70EE00F92C5F /* todo_redo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todo_redo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8CD951B224D70EE00F92C5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8CD951D224D70EE00F92C5F /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
@@ -23,7 +24,6 @@
 		B8CD9522224D70EE00F92C5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8CD9525224D70EE00F92C5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8CD9527224D70EE00F92C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B8CD953422502B4100F92C5F /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +78,6 @@
 		B8CD952E22502A6100F92C5F /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				B8CD953422502B4100F92C5F /* Item.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -87,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				B8CD951F224D70EE00F92C5F /* Main.storyboard */,
+				B838C6F022526BB8008D0417 /* DataModel.xcdatamodeld */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -163,7 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8CD951E224D70EE00F92C5F /* TodoViewController.swift in Sources */,
-				B8CD953522502B4100F92C5F /* Item.swift in Sources */,
+				B838C6F222526BB9008D0417 /* DataModel.xcdatamodeld in Sources */,
 				B8CD951C224D70EE00F92C5F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,6 +364,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B838C6F022526BB8008D0417 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B838C6F122526BB9008D0417 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = B838C6F122526BB9008D0417 /* DataModel.xcdatamodel */;
+			name = DataModel.xcdatamodeld;
+			path = "../Data Model/DataModel.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B8CD9510224D70EE00F92C5F /* Project object */;
 }
