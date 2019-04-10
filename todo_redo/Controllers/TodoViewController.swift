@@ -20,11 +20,14 @@ class TodoViewController: UITableViewController {
         super.viewDidLoad()
         loadItems()
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        
     }
+    
     //    MARK: DATA SOURCE
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArray.count
     }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoItemCell", for: indexPath)
         cell.textLabel?.text = itemArray[indexPath.row].title
@@ -89,15 +92,36 @@ class TodoViewController: UITableViewController {
     }
 
     
-    func loadItems() {
-        let request : NSFetchRequest<Item> = Item.fetchRequest()
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+        
+//        let request : NSFetchRequest<Item> = Item.fetchRequest()
         do {
             itemArray =  try context.fetch(request)
         } catch {
             print("Error fetching context, \(error)")
         }
+        tableView.reloadData()
     }
     
 
+}
+
+// MARK: -Search Bar Methods
+//extension to extend TodoListViewController functionality
+
+extension TodoViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        In order to read data from context we must declare a request and declare its datatype
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        
+//        to query objects using core data we need To use NSpredicate
+//        NSpredicate is a foundation class that specifies how data should be fetched or filtered
+//        %@ substitutes any argument you want to pass in. In this case searchBar.text!
+        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+    
+        loadItems(with: request)
+        tableView.reloadData()
+    }
 }
 
